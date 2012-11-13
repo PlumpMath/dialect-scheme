@@ -1,4 +1,0 @@
-
-#lang racket
-
-(write 'ss)
