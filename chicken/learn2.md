@@ -54,3 +54,39 @@ chicken-install -r name           ; to obtain the source code to an egg
 不好, 太久没维护无法正常安装了... 先跳过
 
 
+Chicken 通过 [SWIG (Simplified Wrapper and Interface Generator)][swig] 调用 C/C++ 代码
+[readline][readline] 是开发需要的基本模块, 在 REPL 中也有用到
+通过 `load "name.scm"` 这个函数可以夹在别的文件的里代码
+
+[readline]: http://wiki.call-cc.org/eggref/4/readline
+[swig]: http://www.swig.org/
+
+`-ss` 参数将脚本执行时脚本中需要有 `main` 函数
+此外, `main` 接收 `argv` 参数, 来自命令行的参数, 一个列表
+用 `csc` 命令可以编译脚本到二进制的可执行文件
+`-dynamic` 参数用来编译到 `.so` 的动态链接库, 奇怪只有一条连字符
+`-o` 参数用来把脚本编译成 `.o` 的对象文件, C 的内容
+通过 `declare` 函数, 不同的文件编译成 `.o`, 之后链接在一起
+``` bash
+$ csc -c pal-proc.scm
+$ csc -c pal-user.scm
+$ csc -o pal-separate pal-proc.o pal-user.o
+$ ./pal-separate level
+level is a palindrome
+```
+
+Chicken 还可以通过 `#<>#` 来嵌入 C 代码, 借此调用 C 函数
+在编译阶段链接到一起形成可执行文件. 估计我不会去用
+[`csc`][csc] 命令的参数一看真是相当多, 编译器..
+
+[FAQ][faq] 里提了许多关于使用的细节, 包括一些教程没写的细节
+可以用 `load file.so` 夹在编译过的动态链接库. 但要 `-shared` 参数
+还有 `module` 的用法和 `declare` 相近, FAQ 没详细写
+关于[递归在 Chicken 的实现][collection], 又讲了一遍
+使用非标准语法需要 `(require-library chicken-syntax)`
+提到一个[并行模块 mpi][mpi], 我突然觉得 Chicken 也好难学..
+
+[mpi]: http://wiki.call-cc.org/eggref/4/mpi
+[collection]: http://wiki.call-cc.org/man/4/faq#why-does-a-loop-that-doesnt-consstill-trigger-garbage-collections
+[faq]: http://wiki.call-cc.org/man/4/faq
+[csc]: http://wiki.call-cc.org/man/4/Using%20the%20compiler

@@ -1,0 +1,8 @@
+
+compile -s -O3 -d1 "my-lib.scm" -j my-lib
+compile -s -O3 -d0 "my-lib.import.scm"
+
+install-extension
+  'my-lib
+  '("my-lib.so" "my-lib.import.so")
+  '(("version 1.0"))

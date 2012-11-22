@@ -9,7 +9,7 @@ print
 print
   + 10 (string->number "5")
 
-print #d21
+print #d21 'dfgfg
 print #o25
 print #x15
 print #b10101

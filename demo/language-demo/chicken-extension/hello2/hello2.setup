@@ -1,0 +1,3 @@
+
+(compile hello2.scm)
+(install-program 'hello2 "hello2")

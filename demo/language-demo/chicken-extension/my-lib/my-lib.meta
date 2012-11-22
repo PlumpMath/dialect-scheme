@@ -1,0 +1,6 @@
+
+((files "my-lib.setup" "my-lib.scm")
+  (license "BSD")
+  (author "Me again")
+  (synopsis "my own cool library"))
+

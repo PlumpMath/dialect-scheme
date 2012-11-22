@@ -1,0 +1,5 @@
+
+((author "Me")
+  (synopsis "a cool hello-world application")
+  (license "proprietary")
+  (files "hello.scm" "hello.setup"))
